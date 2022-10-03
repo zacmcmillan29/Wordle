@@ -5,6 +5,7 @@ This module is the starter file for the Wordle assignment.
 BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
 """
 
+from platform import java_ver
 import random
 
 from WordleDictionary import FIVE_LETTER_WORDS
@@ -18,45 +19,85 @@ def wordle():
     
     def word_not_found(s):
         gw.show_message("This is not a word. Please enter a valid word.")
+        
+    def word_found(s):
+        gw.show_message("This is a valid word.")
     
 # Iterate over each row and then each column. Create a string from each letter. Add each letter to the previously created word.
     def concat_words(s):
-        for i in range(5):
-            for j in range(5):
-                string = " "
-                letter = gw.get_square_letter(i, j)
-                string = string + letter
-                # string = f"{string}{letter}" 
-                # this is just to test if the concatenation works
-                gw.show_message("The word is: " + string) 
-# this part checks if word is valid and if not, display proper message, if so, add one to current row.
+        curr_row = gw.get_current_row()
         string = ""
-        for words in FIVE_LETTER_WORDS: 
-            if string != words: 
-                gw.add_enter_listener(word_not_found)  
-                gw.set_current_row(2)
-            # add 1 to the current_set_row to make next guess on the next row if word is found
-            else: 
-                # need to create method to add one to row 
-                gw.set_current_row(1)            
+        for j in range(5):
+            letter = gw.get_square_letter(curr_row, j)
+            string = string + letter
+            string = string.lower()
+        if string in FIVE_LETTER_WORDS: 
+            gw.add_enter_listener(word_found)
+            gw.set_current_row(gw.get_current_row() + 1)
+        else: 
+            gw.add_enter_listener(word_not_found)
             
+            
+            
+        # for i in range(5):
+        #     for j in range(0, 5):
+        
+        #         # letter = gw.get_square_letter(i, j)
+        #         # string = string + letter
+        #         # string = f"{string}{letter}" 
+        #         # letter = gw.get_square_letter(0,j)
+        #         letter1 = gw.get_square_letter(0,0)
+        #         letter2 = gw.get_square_letter(0,1)
+        #         letter3 = gw.get_square_letter(0,2)
+        #         letter4 = gw.get_square_letter(0,3)
+        #         letter5 = gw.get_square_letter(0,4)
+        #         string = letter1 + letter2 + letter3 + letter4 + letter5
+        #         string = string.lower()
+        # if string in FIVE_LETTER_WORDS: 
+        #     gw.add_enter_listener(word_found)
+        #     gw.set_current_row(gw.get_current_row() + 1)
+        # else: 
+        #     gw.add_enter_listener(word_not_found)
+# this part checks if word is valid and if not, display proper message, if so, add one to current row.
+            # string = "clear"
+        # for words in FIVE_LETTER_WORDS: 
+        #     if string != words: 
+        #         gw.add_enter_listener(word_not_found)  
+        #         # gw.set_current_row(2)
+        #     # add 1 to the current_set_row to make next guess on the next row if word is found
+        #     else: 
+        #         # need to create method to add one to row 
+        #         gw.show_message("word found")
+        #         # gw.add_enter_listener(word_found)
+        #         gw.set_current_row(i + 1)        
+# this part checks to see if the string is found in the list. If so, add a row, if not, display proper message.                               
+        
+        # # string = "clear"  
+        # if string in FIVE_LETTER_WORDS: 
+        #     gw.add_enter_listener(word_found)
+        #     # gw.set_current_row(i)
+        # else: 
+        #     gw.add_enter_listener(word_not_found)
+            
+                
 
-# check if string is in the dictionary. if not, display message. If so, add one to current row.            
-    def check_word(s): 
-        string = ""
-        gw.set_current_row(0)
-        for words in FIVE_LETTER_WORDS: 
-            if string != words: 
-                gw.add_enter_listener(word_not_found)  
-                gw.set_current_row(2)
-            # add 1 to the current_set_row to make next guess on the next row if word is found
-            else: 
-                gw.set_current_row(1)
+# # check if string is in the dictionary. if not, display message. If so, add one to current row.            
+#     def check_word(s): 
+#         string = ""
+#         # gw.set_current_row(0)
+#         for words in FIVE_LETTER_WORDS: 
+#             if string != words: 
+#                 gw.add_enter_listener(word_not_found)  
+#                 # gw.set_current_row(2)
+#             # add 1 to the current_set_row to make next guess on the next row if word is found
+#             else: 
+#                 gw.set_current_row(1)
+
 
                        
     gw = WordleGWindow()    
     gw.add_enter_listener(concat_words)
-    gw.add_enter_listener(check_word)
+    # gw.add_enter_listener(check_word)
     # gw.add_enter_listener(enter_action)
     
        
@@ -69,5 +110,3 @@ def wordle():
 
 if __name__ == "__main__":
     wordle()
-
-
