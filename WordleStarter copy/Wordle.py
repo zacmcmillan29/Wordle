@@ -9,7 +9,7 @@ from platform import java_ver
 import random
 
 from WordleDictionary import FIVE_LETTER_WORDS
-from WordleGraphics import WordleGWindow, N_COLS, N_ROWS
+from WordleGraphics import WordleGWindow, N_COLS, N_ROWS, MISSING_COLOR, PRESENT_COLOR, CORRECT_COLOR
 
 def wordle(): 
     # def enter_action(s):
@@ -24,6 +24,23 @@ def wordle():
         gw.show_message("This is a valid word.")
     
 # Iterate over each row and then each column. Create a string from each letter. Add each letter to the previously created word.
+    def color_box(s):
+        curr_row = gw.get_current_row() - 1
+        rWord = RandWord
+        for i in range(5):
+            gw.set_square_color(curr_row, i, MISSING_COLOR)
+
+        for j in range(5):
+            letter = gw.get_square_letter(curr_row, j).lower()
+            for k in range(5):
+                if (RandWord[k] == letter):
+                    gw.set_square_color(curr_row,j, PRESENT_COLOR)
+
+        for l in range(5):
+            letter = gw.get_square_letter(curr_row, l).lower()
+            if (letter == RandWord[l]):
+                gw.set_square_color(curr_row,l, CORRECT_COLOR)
+
     def concat_words(s):
         curr_row = gw.get_current_row()
         string = ""
@@ -32,79 +49,40 @@ def wordle():
             string = string + letter
             string = string.lower()
         if string in FIVE_LETTER_WORDS: 
+            gw.add_enter_listener(color_box)
             gw.add_enter_listener(word_found)
+            
             gw.set_current_row(gw.get_current_row() + 1)
         else: 
             gw.add_enter_listener(word_not_found)
             
-            
-            
-        # for i in range(5):
-        #     for j in range(0, 5):
-        
-        #         # letter = gw.get_square_letter(i, j)
-        #         # string = string + letter
-        #         # string = f"{string}{letter}" 
-        #         # letter = gw.get_square_letter(0,j)
-        #         letter1 = gw.get_square_letter(0,0)
-        #         letter2 = gw.get_square_letter(0,1)
-        #         letter3 = gw.get_square_letter(0,2)
-        #         letter4 = gw.get_square_letter(0,3)
-        #         letter5 = gw.get_square_letter(0,4)
-        #         string = letter1 + letter2 + letter3 + letter4 + letter5
-        #         string = string.lower()
-        # if string in FIVE_LETTER_WORDS: 
-        #     gw.add_enter_listener(word_found)
-        #     gw.set_current_row(gw.get_current_row() + 1)
-        # else: 
-        #     gw.add_enter_listener(word_not_found)
-# this part checks if word is valid and if not, display proper message, if so, add one to current row.
-            # string = "clear"
-        # for words in FIVE_LETTER_WORDS: 
-        #     if string != words: 
-        #         gw.add_enter_listener(word_not_found)  
-        #         # gw.set_current_row(2)
-        #     # add 1 to the current_set_row to make next guess on the next row if word is found
-        #     else: 
-        #         # need to create method to add one to row 
-        #         gw.show_message("word found")
-        #         # gw.add_enter_listener(word_found)
-        #         gw.set_current_row(i + 1)        
-# this part checks to see if the string is found in the list. If so, add a row, if not, display proper message.                               
-        
-        # # string = "clear"  
-        # if string in FIVE_LETTER_WORDS: 
-        #     gw.add_enter_listener(word_found)
-        #     # gw.set_current_row(i)
-        # else: 
-        #     gw.add_enter_listener(word_not_found)
-            
-                
 
-# # check if string is in the dictionary. if not, display message. If so, add one to current row.            
-#     def check_word(s): 
-#         string = ""
-#         # gw.set_current_row(0)
-#         for words in FIVE_LETTER_WORDS: 
-#             if string != words: 
-#                 gw.add_enter_listener(word_not_found)  
-#                 # gw.set_current_row(2)
-#             # add 1 to the current_set_row to make next guess on the next row if word is found
-#             else: 
-#                 gw.set_current_row(1)
+    
 
 
+    
                        
     gw = WordleGWindow()    
-    gw.add_enter_listener(concat_words)
-    # gw.add_enter_listener(check_word)
-    # gw.add_enter_listener(enter_action)
-    
-       
+
     RandWord = FIVE_LETTER_WORDS[random.randrange(0,len(FIVE_LETTER_WORDS),1)]
+    
+    #*********Zach - Comment Out Next Three lines to hide correct word
     print(RandWord)
     for i in range(5):
         gw.set_square_letter(0, i, RandWord[i])
+
+
+
+
+    #gw.add_enter_listener(color_box)
+    gw.add_enter_listener(concat_words)
+    
+    
+       
+    
+
+    
+    
 
 # Startup code
 
