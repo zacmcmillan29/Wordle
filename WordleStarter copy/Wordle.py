@@ -28,18 +28,17 @@ def wordle():
         curr_row = gw.get_current_row() - 1
         rWord = RandWord
         for i in range(5):
-            gw.set_square_color(curr_row, i, MISSING_COLOR)
+            letter = gw.get_square_letter(curr_row, i).lower()
+            if (letter == RandWord[i]):
+                gw.set_square_color(curr_row,i, CORRECT_COLOR)
+            else:
+                for k in range(5):
+                    if (RandWord[k] == letter and gw.get_square_color(curr_row, k)!= CORRECT_COLOR):
+                        gw.set_square_color(curr_row,i, PRESENT_COLOR)
+                    elif (gw.get_square_color(curr_row, k) != CORRECT_COLOR):
+                        gw.set_square_color(curr_row, i, MISSING_COLOR)
 
-        for j in range(5):
-            letter = gw.get_square_letter(curr_row, j).lower()
-            for k in range(5):
-                if (RandWord[k] == letter):
-                    gw.set_square_color(curr_row,j, PRESENT_COLOR)
 
-        for l in range(5):
-            letter = gw.get_square_letter(curr_row, l).lower()
-            if (letter == RandWord[l]):
-                gw.set_square_color(curr_row,l, CORRECT_COLOR)
 
     def concat_words(s):
         curr_row = gw.get_current_row()
