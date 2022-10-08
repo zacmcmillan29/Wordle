@@ -31,12 +31,12 @@ def wordle():
             letter = gw.get_square_letter(curr_row, i).lower()
             if (letter == RandWord[i]):
                 gw.set_square_color(curr_row,i, CORRECT_COLOR)
-            else:
-                for k in range(5):
-                    if (RandWord[k] == letter and gw.get_square_color(curr_row, k)!= CORRECT_COLOR):
-                        gw.set_square_color(curr_row,i, PRESENT_COLOR)
-                    elif (gw.get_square_color(curr_row, k) != CORRECT_COLOR):
-                        gw.set_square_color(curr_row, i, MISSING_COLOR)
+        for i in range (5):
+            for k in range(5):
+                if (RandWord[k] == letter and gw.get_square_color(curr_row, k)!= CORRECT_COLOR):
+                    gw.set_square_color(curr_row,i, PRESENT_COLOR)
+                elif (gw.get_square_color(curr_row, k) != CORRECT_COLOR):
+                    gw.set_square_color(curr_row, i, MISSING_COLOR)
 
 
 
