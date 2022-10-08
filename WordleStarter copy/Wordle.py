@@ -26,18 +26,18 @@ def wordle():
 # Iterate over each row and then each column. Create a string from each letter. Add each letter to the previously created word.
     def color_box(s):
         curr_row = gw.get_current_row() - 1
-        rWord = RandWord
         for i in range(5):
             letter = gw.get_square_letter(curr_row, i).lower()
             if (letter == RandWord[i]):
                 gw.set_square_color(curr_row,i, CORRECT_COLOR)
+            else:
+                gw.set_square_color(curr_row, i, MISSING_COLOR)
         for i in range (5):
             letter = gw.get_square_letter(curr_row, i).lower()
             for k in range(5):
                 if (RandWord[k] == letter and gw.get_square_color(curr_row, k)!= CORRECT_COLOR):
                     gw.set_square_color(curr_row,i, PRESENT_COLOR)
-                elif (gw.get_square_color(curr_row, k) != CORRECT_COLOR):
-                    gw.set_square_color(curr_row, i, MISSING_COLOR)
+
 
 
 
