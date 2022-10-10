@@ -41,7 +41,6 @@ def wordle():
 
 
 
-# THIS IS WHERE YOU WILL BE WORKING BRIAN. 
 # This is where we change the keyboard colors
     def color_key(s):
         curr_row = gw.get_current_row() - 1
@@ -77,6 +76,7 @@ def wordle():
             string = string.lower()
         if string in FIVE_LETTER_WORDS: 
             gw.add_enter_listener(color_box)
+            gw.add_enter_listener(color_key)
             gw.add_enter_listener(word_found)
             
             gw.set_current_row(gw.get_current_row() + 1)
