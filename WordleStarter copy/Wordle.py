@@ -9,7 +9,7 @@ from platform import java_ver
 import random
 
 from WordleDictionary import FIVE_LETTER_WORDS
-from WordleGraphics import WordleGWindow, N_COLS, N_ROWS, MISSING_COLOR, PRESENT_COLOR, CORRECT_COLOR
+from WordleGraphics import WordleGWindow, N_COLS, N_ROWS, MISSING_COLOR, PRESENT_COLOR, CORRECT_COLOR, KEY_LABELS
 
 def wordle(): 
     # def enter_action(s):
@@ -39,6 +39,33 @@ def wordle():
                     gw.set_square_color(curr_row,i, PRESENT_COLOR)
 
 
+
+
+# THIS IS WHERE YOU WILL BE WORKING BRIAN. 
+# This is where we change the keyboard colors
+    def color_key(s):
+        curr_row = gw.get_current_row() - 1
+        # Much like the change box color function, I want to see the which letter is where and determine which color to change the keys to.
+        for i in range(5):
+            letter = gw.get_square_letter(curr_row, i)
+            print(letter)
+            if (letter == RandWord[i]):
+                gw.set_key_color(letter, CORRECT_COLOR)
+            else:
+                gw.set_key_color(letter, MISSING_COLOR)
+                # This should check which letter is not correct but in the words
+        for i in range (5):
+            letter = gw.get_square_letter(curr_row, i)
+            for k in range(5):
+                if (RandWord[k] == letter and gw.get_key_color(letter)!= CORRECT_COLOR):
+                    gw.set_key_color(letter, PRESENT_COLOR)
+                
+    #    def get_key_color(self, ch):
+    #     return self._keys[ch].get_color()
+
+    # def set_key_color(self, ch, color):
+    #     self._keys[ch].set_color(color)
+    
 
 
     def concat_words(s):
@@ -76,9 +103,15 @@ def wordle():
 
     #gw.add_enter_listener(color_box)
     gw.add_enter_listener(concat_words)
+
+ 
+
+
+
+                
+        
     
     
-       
     
 
     
