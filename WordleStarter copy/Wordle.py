@@ -87,18 +87,6 @@ def wordle():
                         break
                 if(marker == True):
                     gw.set_key_color(letter, MISSING_COLOR)
-        # for i in range (5):
-        #     letter = gw.get_square_letter(curr_row, i)
-        #     for k in range(5):
-        #         if (RandWord[k] == letter_low and gw.get_key_color(letter)!= CORRECT_COLOR):
-        #             gw.set_key_color(letter, PRESENT_COLOR)
-        #             lPresent.append(letter)
-                
-    #    def get_key_color(self, ch):
-    #     return self._keys[ch].get_color()
-
-    # def set_key_color(self, ch, color):
-    #     self._keys[ch].set_color(color)
     
 
 
