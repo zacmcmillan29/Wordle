@@ -45,19 +45,54 @@ def wordle():
     def color_key(s):
         curr_row = gw.get_current_row() - 1
         # Much like the change box color function, I want to see the which letter is where and determine which color to change the keys to.
+        lCorrect = []
+        lPresent = []
+
         for i in range(5):
             letter = gw.get_square_letter(curr_row, i)
-            print(letter)
-            if (letter == RandWord[i]):
-                gw.set_key_color(letter, CORRECT_COLOR)
+            letter_low = letter.lower()
+            # Sets key color to the correct letter
+            if (letter_low == RandWord[i]):
+                CMarker = True
+                PMarker = True
+                for l in lCorrect:
+                    # if(letter == lCorrect[l]):
+                    if letter in l:
+                        CMarker = False
+                        break
+                if(CMarker == True):
+                    gw.set_key_color(letter, CORRECT_COLOR)
+                    lCorrect.append(letter)
+                # Sets key color to Present color
+                else:
+                    for l in lPresent:
+                        # if(letter == lPresent[l]):
+                        if letter in l:
+                            PMarker = False
+                            break
+                    if(PMarker == True):
+                        gw.set_key_color(letter, PRESENT_COLOR)
+                        lPresent.append(letter)
             else:
-                gw.set_key_color(letter, MISSING_COLOR)
-                # This should check which letter is not correct but in the words
-        for i in range (5):
-            letter = gw.get_square_letter(curr_row, i)
-            for k in range(5):
-                if (RandWord[k] == letter and gw.get_key_color(letter)!= CORRECT_COLOR):
-                    gw.set_key_color(letter, PRESENT_COLOR)
+                # Sets key color to missing color
+                marker = True
+                for l in lCorrect:
+                    # if(letter == lCorrect[l]):
+                    if letter in l:
+                        marker = False
+                        break
+                    # if(letter == lPresent[l]):
+                    if letter in l:
+                        marker = False
+                        break
+                if(marker == True):
+                    gw.set_key_color(letter, MISSING_COLOR)
+        # for i in range (5):
+        #     letter = gw.get_square_letter(curr_row, i)
+        #     for k in range(5):
+        #         if (RandWord[k] == letter_low and gw.get_key_color(letter)!= CORRECT_COLOR):
+        #             gw.set_key_color(letter, PRESENT_COLOR)
+        #             lPresent.append(letter)
                 
     #    def get_key_color(self, ch):
     #     return self._keys[ch].get_color()
