@@ -121,9 +121,9 @@ def wordle():
     RandWord = FIVE_LETTER_WORDS[random.randrange(0,len(FIVE_LETTER_WORDS),1)]
     
     #*********Zach - Comment Out Next Three lines to hide correct word
-    print(RandWord)
-    for i in range(5):
-        gw.set_square_letter(0, i, RandWord[i])
+#    print(RandWord)
+#    for i in range(5):
+#        gw.set_square_letter(0, i, RandWord[i])
 
 
 
