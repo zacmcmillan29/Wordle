@@ -16,6 +16,8 @@ def wordle():
     #     # for i in range(5): 
     #     #     gw.set_current_row(i)
     #     gw.show_message("You have to implement this method.")
+    lCorrect = []
+    lPresent = []
     
     def word_not_found(s):
         gw.show_message("This is not a word. Please enter a valid word.")
@@ -45,8 +47,8 @@ def wordle():
     def color_key(s):
         curr_row = gw.get_current_row() - 1
         # Much like the change box color function, I want to see the which letter is where and determine which color to change the keys to.
-        lCorrect = []
-        lPresent = []
+        # lCorrect = []
+        # lPresent = []
 
         for i in range(5):
             letter = gw.get_square_letter(curr_row, i)
@@ -54,40 +56,42 @@ def wordle():
             # Sets key color to the correct letter
             if (letter_low == RandWord[i]):
                 CMarker = True
-                PMarker = True
                 for l in lCorrect:
-                    # if(letter == lCorrect[l]):
                     if letter in l:
                         CMarker = False
                         break
                 if(CMarker == True):
                     gw.set_key_color(letter, CORRECT_COLOR)
                     lCorrect.append(letter)
-                # Sets key color to Present color
-                else:
-                    for l in lPresent:
-                        # if(letter == lPresent[l]):
+            else:
+                # Sets key color to missing color
+                marker = True
+                for l in lCorrect:
+                    if letter in l:
+                        marker = False
+                        break
+                for l in lPresent:
+                    if letter in l:
+                        marker = False
+                        break
+                if(marker == True):
+                    gw.set_key_color(letter, MISSING_COLOR)
+
+        # Sets key color to Present color
+        for i in range (5):
+            letter = gw.get_square_letter(curr_row, i)
+            letter_low = letter.lower()
+            for k in range(5):
+                PMarker = True
+                if (RandWord[k] == letter_low):
+                    PMarker = True
+                    for l in lCorrect:
                         if letter in l:
                             PMarker = False
                             break
                     if(PMarker == True):
                         gw.set_key_color(letter, PRESENT_COLOR)
                         lPresent.append(letter)
-            else:
-                # Sets key color to missing color
-                marker = True
-                for l in lCorrect:
-                    # if(letter == lCorrect[l]):
-                    if letter in l:
-                        marker = False
-                        break
-                    # if(letter == lPresent[l]):
-                    if letter in l:
-                        marker = False
-                        break
-                if(marker == True):
-                    gw.set_key_color(letter, MISSING_COLOR)
-    
 
 
     def concat_words(s):
