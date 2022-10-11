@@ -10,7 +10,6 @@ import random
 
 from WordleDictionary import FIVE_LETTER_WORDS
 from WordleGraphics import WordleGWindow, N_COLS, N_ROWS, MISSING_COLOR, PRESENT_COLOR, CORRECT_COLOR, KEY_LABELS
-
 def wordle(): 
     # def enter_action(s):
     #     # for i in range(5): 
@@ -24,6 +23,19 @@ def wordle():
         
     def word_found(s):
         gw.show_message("This is a valid word.")
+        count = 0
+        curr_row = gw.get_current_row()-1
+        for i in range(5):
+            if (gw.get_square_color(curr_row, i) == CORRECT_COLOR):
+                count +=1
+        if (count == 5):
+            gw.show_message("Great job! You got the word right!")
+        elif (curr_row == 5):
+            gw.show_message('You suck! The word is, "' + RandWord + '"')
+
+
+            
+
     
 # Iterate over each row and then each column. Create a string from each letter. Add each letter to the previously created word.
     def color_box(s):
@@ -103,10 +115,12 @@ def wordle():
             string = string.lower()
         if string in FIVE_LETTER_WORDS: 
             gw.add_enter_listener(color_box)
-            gw.add_enter_listener(color_key)
-            gw.add_enter_listener(word_found)
-            
-            gw.set_current_row(gw.get_current_row() + 1)
+            gw.add_enter_listener(color_key)    
+            gw.add_enter_listener(word_found)            
+            try:
+                gw.set_current_row(gw.get_current_row() + 1)
+            except:
+                pass
         else: 
             gw.add_enter_listener(word_not_found)
             
