@@ -35,7 +35,7 @@ def wordle():
         for i in range (5):
             letter = gw.get_square_letter(curr_row, i).lower()
             for k in range(5):
-                if (RandWord[k] == letter and gw.get_square_color(curr_row, k)!= CORRECT_COLOR):
+                if (RandWord[k] == letter and gw.get_square_color(curr_row, i)!= CORRECT_COLOR and gw.get_square_color(curr_row, k)!= CORRECT_COLOR):
                     gw.set_square_color(curr_row,i, PRESENT_COLOR)
 
 
